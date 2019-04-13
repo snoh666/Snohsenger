@@ -108,7 +108,7 @@ body {
 }
 
 .message span {
-  width: 70%;
+  max-width: 70%;
 }
 
 .user-left {
