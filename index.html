@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Snohsenger</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <div class="site">
+    <div class="users">
+      <select name="user">
+        <option value="user1">User 1</option>
+        <option value="user2">User 2</option>
+      </select>
+    </div>
+    <div class="info">
+      <span>
+        After refreshing page (including another users joining) all messages are deleted from database
+      </span>
+    </div>
+    <div class="content">
+      <div class="col"></div>
+      <form id="messageForm">
+        <textarea form="messageForm" type="text" id="message" placeholder="Type a message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+  <script src="./index.js"></script>
+</body>
+</html>
