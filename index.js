@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
   //Clear user1 user2 from previously messages
   databaseGlobal.ref('user1/').remove();
   databaseGlobal.ref('user2/').remove();
-
-  databaseGlobal.ref('user1/').on('child_removed', () => {
-    document.getElementsByClassName('col')[0].innerHTML = '';
-  });
-  databaseGlobal.ref('user2/').on('child_removed', () => {
-    document.getElementsByClassName('col')[0].innerHTML = '';
-  });
+  // -------------- DELETE MESSAGES IF SOMEONE CONNECTED -------
+  // databaseGlobal.ref('user1/').on('child_removed', () => {
+  //   document.getElementsByClassName('col')[0].innerHTML = '';
+  // });
+  // databaseGlobal.ref('user2/').on('child_removed', () => {
+  //   document.getElementsByClassName('col')[0].innerHTML = '';
+  // });
 
   databaseGlobal.ref('user1/').on('child_added', value => {
     let messageUser = value.val().message;
