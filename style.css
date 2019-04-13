@@ -31,8 +31,10 @@ body {
 .info {
   position: fixed;
   width: 30vw;
+  height: auto;
   top: 0;
   right: 0;
+  padding: 5px;
   color: white;
   cursor: pointer;
 }
