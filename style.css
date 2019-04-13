@@ -96,6 +96,33 @@ body {
   background-color: #0c0c0c;
 }
 
+.message {
+  width: 95%;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  margin: 5px 0;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.message span {
+  width: 70%;
+}
+
+.user-left {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.user-right {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
 form {
   width: 100%;
   display: -webkit-box;
@@ -132,36 +159,5 @@ form button {
 
 form button:hover {
   color: #999999;
-}
-
-.user-left {
-  width: 90%;
-  height: 25px;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-  padding: 5px;
-  color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-}
-
-.user-right {
-  width: 90%;
-  height: 25px;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
-  padding: 5px;
-  color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
 }
 /*# sourceMappingURL=style.css.map */

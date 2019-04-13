@@ -10,6 +10,12 @@ var config = {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  Notification.requestPermission();
+
+  window.addEventListener('focus', () => {
+    document.title = 'Snohsenger';
+  });
+
   firebase.initializeApp(config);
 
   //Listener for click on info
@@ -21,26 +27,41 @@ document.addEventListener('DOMContentLoaded', () => {
   //Clear user1 user2 from previously messages
   databaseGlobal.ref('user1/').remove();
   databaseGlobal.ref('user2/').remove();
-  // -------------- DELETE MESSAGES IF SOMEONE CONNECTED -------
-  // databaseGlobal.ref('user1/').on('child_removed', () => {
-  //   document.getElementsByClassName('col')[0].innerHTML = '';
-  // });
-  // databaseGlobal.ref('user2/').on('child_removed', () => {
-  //   document.getElementsByClassName('col')[0].innerHTML = '';
-  // });
 
   databaseGlobal.ref('user1/').on('child_added', value => {
     let messageUser = value.val().message;
+    if(!document.hasFocus()) {
+      if(Notification.permission == 'granted') {
+        const notify = new Notification(`User 1: ${messageUser}`);
+      }
+      document.title = 'New Message!!';
+    }
 
-    document.getElementsByClassName('col')[0].innerHTML += `<div class="user-left"><span>${messageUser}</span></div>`;
+    const messageCol = document.getElementsByClassName('col')[0];
+    messageCol.innerHTML += `<div class="message user-left"><span>${messageUser}</span></div>`;
+    messageCol.scrollTop = messageCol.scrollHeight;
   });
   databaseGlobal.ref('user2/').on('child_added', value => {
     let messageUser =  value.val().message;
+    if(!document.hasFocus()) {
+      if (Notification.permission == 'granted') {
+        const notify = new Notification(`User 2: ${messageUser}`);
+      }
+      document.title = 'New Message!!';
+    }
 
-    document.getElementsByClassName('col')[0].innerHTML += `<div class="user-right"><span>${messageUser}</span></div>`;
+    const messageCol = document.getElementsByClassName('col')[0];
+    messageCol.innerHTML += `<div class="message user-right"><span>${messageUser}</span></div>`;
+    messageCol.scrollTop = messageCol.scrollHeight;
   });
 
-
+  document.getElementById('message').addEventListener('keypress', e => {
+    if(e.keyCode == 13) {
+      e.preventDefault();
+      document.querySelectorAll('button')[0].click();
+      document.getElementById('message').value = '';
+    }
+  });
   document.getElementById('messageForm').addEventListener('submit', (e) => {
     e.preventDefault();
 
