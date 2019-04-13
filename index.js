@@ -7,9 +7,10 @@ var config = {
   storageBucket: "small-messenger.appspot.com",
   messagingSenderId: "614598560458"
 };
-firebase.initializeApp(config);
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  firebase.initializeApp(config);
 
   //Listener for click on info
   document.getElementsByClassName('info')[0].addEventListener('click',() => {
@@ -20,6 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
   //Clear user1 user2 from previously messages
   databaseGlobal.ref('user1/').remove();
   databaseGlobal.ref('user2/').remove();
+
+  databaseGlobal.ref('user1/').on('child_removed', () => {
+    document.getElementsByClassName('col')[0].innerHTML = '';
+  });
+  databaseGlobal.ref('user2/').on('child_removed', () => {
+    document.getElementsByClassName('col')[0].innerHTML = '';
+  });
 
   databaseGlobal.ref('user1/').on('child_added', value => {
     let messageUser = value.val().message;
