@@ -37,9 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.title = 'New Message!!';
     }
 
-    const messageCol = document.getElementsByClassName('col')[0];
-    messageCol.innerHTML += `<div class="message user-left"><span>${messageUser}</span></div>`;
-    messageCol.scrollTop = messageCol.scrollHeight;
+    const messageCol = [document.getElementsByClassName('col-content')[0], document.getElementsByClassName('col')[0]];
+    messageCol[0].innerHTML += `<div class="message user-left"><span>${messageUser}</span></div>`;
+    messageCol[1].scrollTop = messageCol[1].scrollHeight;
   });
   databaseGlobal.ref('user2/').on('child_added', value => {
     let messageUser =  value.val().message;
@@ -50,9 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
       document.title = 'New Message!!';
     }
 
-    const messageCol = document.getElementsByClassName('col')[0];
-    messageCol.innerHTML += `<div class="message user-right"><span>${messageUser}</span></div>`;
-    messageCol.scrollTop = messageCol.scrollHeight;
+    const messageCol = [document.getElementsByClassName('col-content')[0], document.getElementsByClassName('col')[0]];
+    messageCol[0].innerHTML += `<div class="message user-right"><span>${messageUser}</span></div>`;
+    messageCol[1].scrollTop = messageCol[1].scrollHeight;
   });
 
   document.getElementById('message').addEventListener('keypress', e => {
