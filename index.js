@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.screenTop({
       top: window.innerHeight,
       left: 0,
-      behaviour: smooth
+      behaviour: 'smooth'
     });
   });
 
