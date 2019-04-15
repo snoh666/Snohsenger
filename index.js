@@ -10,6 +10,7 @@ var config = {
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  //Ask user to allow system notification from site
   Notification.requestPermission();
 
   //If user comeback and is focused on site set title to default
@@ -90,25 +91,24 @@ document.addEventListener('DOMContentLoaded', () => {
     //Get textarea object
     const message = document.getElementById('message');
 
-    //If user have inputed something
+    //Function to push message into database
+    const pushToDb = (user) => {
+      let databaseLocal = firebase.database().ref(user); //Set database ref to match user2
+
+      databaseLocal.push({ // Push message to database
+        message: message.value
+      });
+      message.value = ''; // Set message value to null
+    };
+
     if(message.value !== '') {
       //Get select element object
       const selectElement = document.querySelectorAll('select')[0];
 
       if (selectElement.options[0].selected) { //If user 1 is selected
-        let databaseLocal = firebase.database().ref('user1/'); //
-
-        databaseLocal.push({
-          message: message.value
-        });
-        message.value = '';
+        pushToDb('user1/');
       } else if (selectElement.options[1].selected) { //If user 2 is selected
-        let databaseLocal = firebase.database().ref('user2/'); //Set database ref to match user2
-
-        databaseLocal.push({
-          message: message.value
-        });
-        message.value = '';
+        pushToDb('user2/');
       }
     } else { //If user havent inputed anything cl error
       console.log('Message undefined');
