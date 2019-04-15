@@ -46,11 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
       //If notification allowed
       if (Notification.permission == 'granted') {
         //Notify user
-        if(user === 'user1') {
-          const notify = new Notification(`User 1: ${messageUser}`);
-        } else if(user === 'user2') {
-          const notify = new Notification(`User 2: ${messageUser}`);
-        }
+        () => {
+          return user === 'user1' ? new Notification(`User 1: ${messageUser}`) : new Notification(`User 2: ${messageUser}`);
+        };
+
       }
       //Change title to notify user
       document.title = 'New Message!!';
