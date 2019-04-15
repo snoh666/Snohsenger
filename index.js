@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /*
-  ---------------------MEOBILE SCROLL PAGE DOWN WHILE INPUTING TEXT---------------------------
+  ---------------------MOBILE SCROLL PAGE DOWN WHILE INPUTING TEXT---------------------------
   */
   document.getElementById('message').addEventListener('focus', () => {
     window.scrollTo({
