@@ -1,12 +1,3 @@
-/*
-
-  **** Create new section for login on the same level as .site
-
-  Use localStorage to set username
-  -check if username is set
-  -get item on right if it has the same nickname
-
-*/
 //Firebase Initialization
 var config = {
   apiKey: "AIzaSyD8_ZhbhwWrVYymiDdMTr-3yTJi3wugWHE",
@@ -18,6 +9,25 @@ var config = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+
+
+  let username;
+
+  if (localStorage.getItem('name') !== null) {
+    username = localStorage.getItem('name');
+    document.getElementsByClassName('login')[0].classList.add('move-left');
+    document.getElementsByClassName('site')[0].classList.remove('move-right');
+  } else {
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      localStorage.setItem('name', document.getElementById('username').value);
+      document.getElementsByClassName('login')[0].classList.add('move-left');
+      document.getElementsByClassName('site')[0].classList.remove('move-right');
+
+      username = localStorage.getItem('name');
+    });
+  }
 
   //Ask user to allow system notification from site
   Notification.requestPermission();
@@ -31,36 +41,27 @@ document.addEventListener('DOMContentLoaded', () => {
   firebase.initializeApp(config);
 
   //Listener for click on info element
-  document.getElementsByClassName('info')[0].addEventListener('click',() => {
+  document.getElementsByClassName('info')[0].addEventListener('click', () => {
     document.getElementsByClassName('info')[0].classList.add('display');
   });
 
-  let databaseGlobal = firebase.database();
-  //Clear user1 user2 from previously messages
-  databaseGlobal.ref('user1/').remove();
-  databaseGlobal.ref('user2/').remove();
+  //Set database variable
+  let database = firebase.database().ref('messages/');
 
-  //If added child to correct user call InputMessage function
-  databaseGlobal.ref('user1/').on('child_added', value => {
-    InputMessage(value, 'user1');
-  });
-  databaseGlobal.ref('user2/').on('child_added', value => {
-    InputMessage(value, 'user2');
-  });
 
-  //Function to output data into site
-  const InputMessage = (value, user) => {
-    let messageUser = value.val().message;
+  /*
+    ---------------------DATABASE ON CHILDREN---------------------------
+  */
+  database.on('child_added', value => {
+
+    let valueArr = value.val().split(':');
 
     if (!document.hasFocus()) {
       //If notification allowed
-      if (Notification.permission == 'granted') {
-        //Notify user
-        () => {
-          return user === 'user1' ? new Notification(`User 1: ${messageUser}`) : new Notification(`User 2: ${messageUser}`);
-        };
-
-      }
+      // if (Notification.permission == 'granted') {
+      //   //Notify user
+      //   new Notification('New Message in Snohsenger!');
+      // }
       //Change title to notify user
       document.title = 'New Message!!';
     }
@@ -69,60 +70,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // messageCol[0] - element for grid to input message
     // messageCol[1] - column for auto scroll with overflow style
     const messageCol = [document.getElementsByClassName('col-content')[0], document.getElementsByClassName('col')[0]];
-    //Input element
     //Function to return correct class
     const classReturn = (user) => {
-      return user === 'user1' ? 'user-left' : 'user-right';
+      return user === username ? 'user-right' : 'user-left';
     };
-    //Output data into grid column with matching class for placement
-    messageCol[0].innerHTML += `<div class="message ${classReturn(user)}"><span>${messageUser}</span></div>`;
-    //Scroll
+    //User check function
+    const checkUser = user => {
+      let returnElement;
+      if (user === username) {
+        returnElement = '';
+      } else {
+        returnElement = `<span class="username">${user}</span>:`;
+      }
+      return returnElement;
+    };
+    //Input message with nickname before
+    messageCol[0].innerHTML += `<div class="message ${classReturn(valueArr[0])}"><span>${checkUser(valueArr[0])} ${valueArr[1]}</span></div>`;
+    //Auto scroll
     messageCol[1].scrollTop = messageCol[1].scrollHeight;
-  };
+  });
 
-  //Add listener to keydown while focused on textarea
+  /*
+    --------------------TEXTAREA ENTER---------------------------
+  */
   document.getElementById('message').addEventListener('keypress', e => {
     // If user pressed enter which have keyCode == 13
-    if(e.keyCode == 13) {
+    if (e.keyCode == 13) {
       //Prevent input next row
       e.preventDefault();
       //Click on button to submit
-      document.querySelectorAll('button')[0].click();
+      document.querySelectorAll('#messageForm > button')[0].click();
       //Clear textarea
       document.getElementById('message').value = '';
     }
   });
-  //Listener for form submiting
-  document.getElementById('messageForm').addEventListener('submit', (e) => {
-    //Prevent default php form sending
+  /*
+    ---------------------MESSAGE FORM SUBMIT---------------------------
+  */
+  document.getElementById('messageForm').addEventListener('submit', e => {
     e.preventDefault();
 
-    //Get textarea object
-    const message = document.getElementById('message');
+    if(username !== null) {
+      const messageTextArea = document.getElementById('message').value;
+      const pushVar = `${username}: ${messageTextArea}`;
 
-    //Function to push message into database
-    const pushToDb = (user) => {
-      let databaseLocal = firebase.database().ref(user); //Set database ref to match user2
-
-      databaseLocal.push({ // Push message to database
-        message: message.value
-      });
-      message.value = ''; // Set message value to null
-    };
-
-    if(message.value !== '') {
-      //Get select element object
-      const selectElement = document.querySelectorAll('select')[0];
-
-      if (selectElement.options[0].selected) { //If user 1 is selected
-        pushToDb('user1/');
-      } else if (selectElement.options[1].selected) { //If user 2 is selected
-        pushToDb('user2/');
+      if (message !== '') {
+        database.push(pushVar);
       }
-    } else { //If user havent inputed anything cl error
-      console.log('Message undefined');
     }
-
   });
 
 });

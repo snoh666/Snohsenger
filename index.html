@@ -11,13 +11,13 @@
 </head>
 <body>
 
-  <div class="site">
-    <div class="users">
-      <select name="user">
-        <option value="user1">User 1</option>
-        <option value="user2">User 2</option>
-      </select>
-    </div>
+  <div class="login">
+    <form id="login-form">
+      <input id="username" type="text" placeholder="Username..">
+      <button type="submit">Login</button>
+    </form>
+  </div>
+  <div class="site move-right">
     <div class="info display">
       <span>
         After refreshing page (including another users joining) all messages are being deleted from database.
