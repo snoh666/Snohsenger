@@ -63,14 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Input element
     //Function to return correct class
     const classReturn = (user) => {
-      let userClass;
-      //If it is user1 set class to user-left
-      if (user === 'user1') {
-        userClass = 'user-left';
-      } else if(user === 'user2'){ //If it is user2 set class to user-right
-        userClass = 'user-right';
-      }
-      return userClass;
+      return user === 'user1' ? 'user-left' : 'user-right';
     };
     //Output data into grid column with matching class for placement
     messageCol[0].innerHTML += `<div class="message ${classReturn(user)}"><span>${messageUser}</span></div>`;
