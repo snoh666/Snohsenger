@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ---------------------MEOBILE SCROLL PAGE DOWN WHILE INPUTING TEXT---------------------------
   */
   document.getElementById('message').addEventListener('focus', () => {
-    window.screenTop({
+    window.scrollTo({
       top: window.innerHeight,
       left: 0,
       behaviour: 'smooth'
