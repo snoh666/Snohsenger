@@ -1,9 +1,3 @@
-/*
-
-  Todos:
-    - Make functions to simplify code
-
-*/
 //Firebase Initialization
 var config = {
   apiKey: "AIzaSyD8_ZhbhwWrVYymiDdMTr-3yTJi3wugWHE",
