@@ -1,3 +1,12 @@
+/*
+
+  **** Create new section for login on the same level as .site
+
+  Use localStorage to set username
+  -check if username is set
+  -get item on right if it has the same nickname
+
+*/
 //Firebase Initialization
 var config = {
   apiKey: "AIzaSyD8_ZhbhwWrVYymiDdMTr-3yTJi3wugWHE",
