@@ -111,11 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     if(username !== null) {
-      const messageTextArea = document.getElementById('message').value;
-      const pushVar = `${username}: ${messageTextArea}`;
+      const messageTextArea = document.getElementById('message');
+      const pushVar = `${username}: ${messageTextArea.value}`;
 
-      if (message !== '') {
+      if (messageTextArea.value !== '' || messageTextArea.value !== ' ') {
         database.push(pushVar);
+        messageTextArea.value = '';
       }
     }
   });
