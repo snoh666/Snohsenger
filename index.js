@@ -117,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (messageTextArea.value == '' || messageTextArea.value == ' ') {
         console.log('Nothing inputed');
       } else {
-        console.log(messageTextArea.value);
         database.push(pushVar);
         messageTextArea.value = '';
       }
