@@ -84,8 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       return returnElement;
     };
+    //Function to join whole message
+    const messageJoin = msgArray => {
+      //Deltes first element from array (username)
+      msgArray.shift();
+      //Returnes rest of array joined by ':' cause of it was splited firstly to get username
+      return msgArray.join(':');
+    };
     //Input message with nickname before
-    messageCol[0].innerHTML += `<div class="message ${classReturn(valueArr[0])}"><span>${checkUser(valueArr[0])} ${valueArr[1]}</span></div>`;
+    messageCol[0].innerHTML += `<div class="message ${classReturn(valueArr[0])}"><span>${checkUser(valueArr[0])} ${messageJoin(valueArr)}</span></div>`;
     //Auto scroll
     messageCol[1].scrollTop = messageCol[1].scrollHeight;
   });
