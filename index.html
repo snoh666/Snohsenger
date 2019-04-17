@@ -11,30 +11,45 @@
 </head>
 <body>
 
-  <div class="login move-left">
-    <form id="login-form">
-      <input id="username" type="text" placeholder="Username.." autocomplete="off">
-      <button type="submit">Login</button>
-    </form>
-  </div>
-  <div class="site move-right">
-    <div class="info">
-      <span>
-        App is still in development. Remeber to refresh site on load using cache clear to see all new changes (ctrl +
-        shift + r).
-        <span class="username">Click here to close popup..</span>
-      </span>
-    </div>
-    <div class="content">
-      <div class="col">
-        <div class="col-content"></div>
-      </div>
-      <form id="messageForm">
-        <textarea form="messageForm" type="text" id="message" placeholder="Type a message"></textarea>
-        <button type="submit">Send</button>
+  <section>
+    <div class="login move-left">
+      <form id="login-form">
+        <input id="username" type="text" placeholder="Username.." autocomplete="off">
+        <button type="submit">Login</button>
       </form>
     </div>
-  </div>
+  </section>
+  <section>
+    <div class="site move-right">
+      <div class="info">
+        <span>
+          App is still in development. Remeber to refresh site on load using cache clear to see all new changes (ctrl +
+          shift + r).
+          <span class="username">Click here to close popup..</span>
+          <p>Visit my github profile at to see other projects: www.github.com/snoh666</p>
+        </span>
+      </div>
+      <div class="content">
+        <div class="col">
+          <div class="col-content"></div>
+        </div>
+        <form id="messageForm">
+          <textarea form="messageForm" type="text" id="message" placeholder="Type a message"></textarea>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="about">
+      <header>
+        About site
+      </header>
+      <section>
+
+      </section>
+    </div>
+  </section>
 
   <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
   <script src="./index.js"></script>
