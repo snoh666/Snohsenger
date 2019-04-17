@@ -25,9 +25,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
 
-      localStorage.setItem('name', document.getElementById('username').value);
-      document.getElementsByClassName('login')[0].classList.add('move-left');
-      document.getElementsByClassName('site')[0].classList.remove('move-right');
+      let usernameInput = document.getElementById('username').value.replace(/\s/g, "");;
+      if(usernameInput === '' || usernameInput === ' ') {
+        alert('Username cant be empty!');
+      } else {
+        localStorage.setItem('name', usernameInput);
+        document.getElementsByClassName('login')[0].classList.add('move-left');
+        document.getElementsByClassName('site')[0].classList.remove('move-right');
+      }
 
       username = localStorage.getItem('name');
     });
