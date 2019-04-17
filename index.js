@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
 
-      let usernameInput = document.getElementById('username').value.replace(/\s/g, "");;
+      let usernameInput = document.getElementById('username').value.replace(/\s/g, "").replace(/(<([^>]+)>)/ig,"");
       if(usernameInput === '' || usernameInput === ' ') {
         alert('Username cant be empty!');
       } else {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (messageTextArea.value == '' || messageTextArea.value == ' ') {
         console.log('Nothing inputed');
       } else {
-        database.push(pushVar);
+        database.push(pushVar.replace(/(<([^>]+)>)/ig, ""));
         messageTextArea.value = '';
       }
 
