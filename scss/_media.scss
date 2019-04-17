@@ -15,6 +15,9 @@
   form{
     padding: 0;
   }
+  .info{
+    width: 75vw;
+  }
 }
 @media screen and (max-width: 400px) {
   .site{
@@ -22,5 +25,8 @@
   }
   .content{
     height: 80%;
+  }
+  .info{
+    width: 100vw;
   }
 }

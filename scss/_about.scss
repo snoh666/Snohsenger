@@ -1,0 +1,46 @@
+.about{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  header{
+    font-size: 32px;
+  }
+}
+.btn-about{
+  width: 200px;
+  height: 30px;
+  border: 2px solid white;
+  border-radius: 15px 8px;
+  background: #4b75ff;
+  font-size: 21px;
+  letter-spacing: 3px;
+  color: white;
+  cursor: pointer;
+  margin: 10px 0 10px 0;
+  transition: all .7 ease;
+  &:hover{
+    background: darken(#4b75ff, 50%);
+  }
+}
+.line{
+  width: 200px;
+  height: 2px;
+  margin: 10px 0;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+}
+.about-content{
+  width: 100%;
+  height: 200px;
+  margin-top: 20px;
+  p{
+    margin: 10px 0;
+  }
+}

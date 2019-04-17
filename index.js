@@ -8,10 +8,6 @@ var config = {
   messagingSenderId: "614598560458"
 };
 
-window.addEventListener('beforeunload', e => {
-  e.returnValue = 'You have unsaved changes';
-});
-
 document.addEventListener('DOMContentLoaded', () => {
 
 
@@ -38,9 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  //Ask user to allow system notification from site
-  Notification.requestPermission();
-
   //If user comeback and is focused on site set title to default
   window.addEventListener('focus', () => {
     document.title = 'Snohsenger';
@@ -66,11 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let valueArr = value.val().split(':');
 
     if (!document.hasFocus()) {
-      //If notification allowed
-      // if (Notification.permission == 'granted') {
-      //   //Notify user
-      //   new Notification('New Message in Snohsenger!');
-      // }
       //Change title to notify user
       document.title = 'New Message!!';
     }
