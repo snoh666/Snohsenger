@@ -9,7 +9,6 @@ var config = {
 };
 
 window.addEventListener('beforeunload', e => {
-  e.preventDefault();
   e.returnValue = 'You have unsaved changes';
 });
 
