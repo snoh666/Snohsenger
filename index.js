@@ -8,6 +8,10 @@ var config = {
   messagingSenderId: "614598560458"
 };
 
+window.addEventListener('beforeunload', e => {
+ e.returnValue = 'You have unsaved changes';
+});
+
 document.addEventListener('DOMContentLoaded', () => {
 
 
