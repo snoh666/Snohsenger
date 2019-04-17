@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (localStorage.getItem('name') !== null) {
     username = localStorage.getItem('name');
-    document.getElementsByClassName('login')[0].classList.add('move-left');
     document.getElementsByClassName('site')[0].classList.remove('move-right');
   } else {
+    document.getElementsByClassName('login')[0].classList.remove('move-left');
     document.getElementById('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -77,9 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
     //User check function
     const checkUser = user => {
       let returnElement;
+      //If user equals user from localStorage
       if (user === username) {
+        //Don't return any addition name span
         returnElement = '';
       } else {
+        //Return span with username
         returnElement = `<span class="username">${user}</span>:`;
       }
       return returnElement;
