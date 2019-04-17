@@ -143,4 +143,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+/*
+---------------------ABOUT BUTTON LISTENER---------------------------
+*/
+
+  document.getElementsByClassName('btn-about')[0].addEventListener('click', () => {
+    document.getElementsByClassName('site')[0].classList.add('move-left');
+    document.getElementsByClassName('about')[0].classList.remove('move-right');
+
+    document.getElementsByClassName('btn-about-exit')[0].addEventListener('click', () => {
+      document.getElementsByClassName('about')[0].classList.add('move-right');
+      document.getElementsByClassName('site')[0].classList.remove('move-left');
+    });
+  });
+
 });

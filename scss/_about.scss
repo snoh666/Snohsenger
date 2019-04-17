@@ -8,6 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all .4s ease;
   header{
     font-size: 32px;
   }
@@ -27,6 +28,16 @@
   &:hover{
     background: darken(#4b75ff, 50%);
   }
+}
+.btn-about-exit{
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 150px;
+  height: 30px;
+  font-size: 21px;
+  cursor: pointer;
+  color: red;
 }
 .line{
   width: 200px;
