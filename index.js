@@ -131,12 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(username !== null) {
       const messageTextArea = document.getElementById('message');
+      messageTextArea.value = messageTextArea.value.replace(/(<([^>]+)>)/ig, "");
       const pushVar = `${username}: ${messageTextArea.value}`;
 
       if (messageTextArea.value == '' || messageTextArea.value == ' ') {
         console.log('Nothing inputed');
       } else {
-        database.push(pushVar.replace(/(<([^>]+)>)/ig, ""));
+        database.push(pushVar);
         messageTextArea.value = '';
       }
 
