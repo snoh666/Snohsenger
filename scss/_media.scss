@@ -1,0 +1,26 @@
+@media screen and (max-width: 1000px) {
+  .content {
+    width: calc(100vw - 100px);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .content {
+    width: 90%;
+    height: 80%;
+  }
+  .col{
+    height: 85%;
+  }
+  form{
+    padding: 0;
+  }
+}
+@media screen and (max-width: 400px) {
+  .site{
+    justify-content: flex-start;
+  }
+  .content{
+    height: 80%;
+  }
+}

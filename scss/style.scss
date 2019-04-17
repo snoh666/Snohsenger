@@ -1,0 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #2b2b2b;
+  font-family: 'Montserrat',
+  sans-serif;
+}
+// Other style's
+@import '_login.scss';
+@import '_main.scss';
+@import '_popups.scss';
+@import '_jsClasses.scss';
+@import '_media.scss';

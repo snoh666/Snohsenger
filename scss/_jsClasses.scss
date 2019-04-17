@@ -1,0 +1,25 @@
+.display {
+  visibility: hidden;
+}
+
+.user-left {
+  justify-content: flex-start;
+  justify-self: start;
+}
+
+.user-right {
+  justify-content: flex-end;
+  justify-self: end;
+}
+.move-left{
+  transform: translateX(-100%);
+  visibility: hidden;
+}
+.move-right{
+  transform: translateX(100%);
+  visibility: hidden;
+}
+.username{
+  font-weight: 600;
+  color: #4b75ff;
+}
