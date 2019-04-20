@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
 
-      let usernameInput = document.getElementById('username').value.replace(/\s/g, "").replace(/(<([^>]+)>)/ig,"");
-      if(usernameInput === '' || usernameInput === ' ') {
+      let usernameInputed = document.getElementById('username').value.replace(/\s/g, "").replace(/(<([^>]+)>)/ig,"");
+      if(usernameInputed === '' || usernameInputed === ' ') {
         alert('Username cant be empty!');
       } else {
-        localStorage.setItem('name', usernameInput);
+        localStorage.setItem('name', usernameInputed);
         document.getElementsByClassName('login')[0].classList.add('move-left');
         document.getElementsByClassName('site')[0].classList.remove('move-right');
       }
@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   //Initalize firebase with config
   firebase.initializeApp(config);
 
-  //Listener for click on info element
   document.getElementsByClassName('info')[0].addEventListener('click', () => {
     document.getElementsByClassName('info')[0].classList.add('display');
   });
@@ -56,10 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
   */
   database.on('child_added', value => {
 
-    let valueArr = value.val().split(':');
+    let valueArrayGeted = value.val().split(':');
 
     if (!document.hasFocus()) {
-      //Change title to notify user
       document.title = 'New Message!!';
     }
 
@@ -68,31 +66,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // messageCol[1] - column for auto scroll with overflow style
     const messageCol = [document.getElementsByClassName('col-content')[0], document.getElementsByClassName('col')[0]];
     //Function to return correct class
-    const classReturn = (user) => {
-      return user === username ? 'user-right' : 'user-left';
+    const classReturn = userFromDatabase => {
+      return userFromDatabase === username ? 'user-right' : 'user-left';
     };
     //User check function
-    const checkUser = user => {
+    const checkUser = userFromDatabase => {
       let returnElement;
-      //If user equals user from localStorage
-      if (user === username) {
-        //Don't return any addition name span
+      if (userFromDatabase === username) {
         returnElement = '';
       } else {
-        //Return span with username
-        returnElement = `<span class="username">${user}</span>:`;
+        returnElement = `<span class="username">${userFromDatabase}</span>:`;
       }
       return returnElement;
     };
     //Function to join whole message
     const messageJoin = msgArray => {
-      //Deltes first element from array (username)
+      //Deletes first element from array (username)
       msgArray.shift();
       //Returnes rest of array joined by ':' cause of it was splited firstly to get username
       return msgArray.join(':');
     };
     //Input message with nickname before
-    messageCol[0].innerHTML += `<div class="message ${classReturn(valueArr[0])}"><span>${checkUser(valueArr[0])} ${messageJoin(valueArr)}</span></div>`;
+    messageCol[0].innerHTML += `<div class="message ${classReturn(valueArrayGeted[0])}"><span>${checkUser(valueArrayGeted[0])} ${messageJoin(valueArrayGeted)}</span></div>`;
     //Auto scroll
     messageCol[1].scrollTop = messageCol[1].scrollHeight;
   });
@@ -107,8 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       //Click on button to submit
       document.querySelectorAll('#messageForm > button')[0].click();
-      //Clear textarea
-      document.getElementById('message').value = '';
     }
   });
   /*
