@@ -1,3 +1,7 @@
+document.getElementsByClassName('info')[0].addEventListener('click', () => {
+  document.getElementsByClassName('info')[0].classList.add('display');
+});
+
 //Firebase Initialization
 var config = {
   apiKey: "AIzaSyD8_ZhbhwWrVYymiDdMTr-3yTJi3wugWHE",
@@ -41,10 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //Initalize firebase with config
   firebase.initializeApp(config);
-
-  document.getElementsByClassName('info')[0].addEventListener('click', () => {
-    document.getElementsByClassName('info')[0].classList.add('display');
-  });
 
   //Set database variable
   let database = firebase.database().ref('messages/');
