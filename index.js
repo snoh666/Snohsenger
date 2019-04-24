@@ -1,5 +1,9 @@
-document.getElementsByClassName('info')[0].addEventListener('click', () => {
-  document.getElementsByClassName('info')[0].classList.add('display');
+window.addEventListener('load', async() => {
+  const hideLoadingScreen = () => {
+    document.getElementById('loadingScreen').classList.add('display');
+    document.getElementsByClassName('info')[0].classList.add('display');
+  };
+  setTimeout(hideLoadingScreen, 4000);
 });
 
 //Firebase Initialization

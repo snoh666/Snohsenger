@@ -8,7 +8,12 @@ body{
   font-family: 'Montserrat',
   sans-serif;
 }
+a {
+  display: block;
+  color: #4b75ff;
+}
 // Other style's
+@import '_loading.scss';
 @import '_login.scss';
 @import '_main.scss';
 @import '_about.scss';
