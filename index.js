@@ -1,6 +1,10 @@
 window.addEventListener('load', async() => {
   const hideLoadingScreen = () => {
-    document.getElementById('loadingScreen').classList.add('display');
+    const loadScreen = document.getElementById('loadingScreen');
+    loadScreen.classList.add('move-left');
+    loadScreen.addEventListener('transitionend', () => {
+      loadScreen.classList.add('display');
+    });
     document.getElementsByClassName('info')[0].classList.add('display');
   };
   setTimeout(hideLoadingScreen, 4000);
