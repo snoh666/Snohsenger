@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pushVar = `${username}: ${messageTextArea.value}`;
 
       if (messageTextArea.value == '' || messageTextArea.value == ' ') {
-        console.log('Nothing inputed');
+        console.warn('Nothing inputed');
       } else {
         database.push(pushVar);
         messageTextArea.value = '';
