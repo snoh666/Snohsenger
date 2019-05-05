@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /*
-    ---------------------DATABASE ON CHILDREN---------------------------
+    ---------------------DATABASE ONCE CHILDREN---------------------------
   */
   database.once('value', async value => {
     //Variables ---------------------------------
@@ -88,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     allMessages.forEach(element => {
       let message = element[1].split(':');
 
-      console.log(message);
       messageCol[0].innerHTML += `<div class="message ${classReturn(message[0])}"><span>${checkUser(message[0])} ${messageJoin(message)}</span></div>`;
       messageCol[1].scrollTop = messageCol[1].scrollHeight;
     });
@@ -130,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pushVar = `${username}: ${messageTextArea.value}`;
 
       if (messageTextArea.value == '' || messageTextArea.value == ' ') {
-        console.log('Nothing inputed');
+        console.warn('Nothing inputed');
       } else {
         database.push(pushVar);
         messageTextArea.value = '';
