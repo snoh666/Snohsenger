@@ -96,8 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     database.limitToLast(1).on('child_added', value => {
       let valueArrayGeted = value.val().split(':');
-      let lastMessage = document.querySelectorAll('.message');
-      lastMessage = lastMessage[lastMessage.length - 1].childNodes[0].innerHTML;
 
       if (!document.hasFocus()) {
         document.title = 'New Message!!';
