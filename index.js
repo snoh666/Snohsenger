@@ -7,7 +7,7 @@ window.addEventListener('load', async() => {
     });
     document.getElementsByClassName('info')[0].classList.add('display');
   };
-  setTimeout(hideLoadingScreen, 4000);
+  setTimeout(hideLoadingScreen, 6000);
 });
 
 //Firebase Initialization
@@ -61,23 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
   /*
     ---------------------DATABASE ON CHILDREN---------------------------
   */
-  database.on('child_added', value => {
-
-    let valueArrayGeted = value.val().split(':');
-
-    if (!document.hasFocus()) {
-      document.title = 'New Message!!';
-    }
-
-    //Get elements into array to input message and scroll
-    // messageCol[0] - element for grid to input message
-    // messageCol[1] - column for auto scroll with overflow style
+  database.once('value', async value => {
+    //Variables ---------------------------------
+    let allMessages = value.val();
+    allMessages = Object.entries(allMessages);
     const messageCol = [document.getElementsByClassName('col-content')[0], document.getElementsByClassName('col')[0]];
-    //Function to return correct class
+    //Functions -------------------------------------
     const classReturn = userFromDatabase => {
       return userFromDatabase === username ? 'user-right' : 'user-left';
     };
-    //User check function
     const checkUser = userFromDatabase => {
       let returnElement;
       if (userFromDatabase === username) {
@@ -87,19 +79,33 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       return returnElement;
     };
-    //Function to join whole message
     const messageJoin = msgArray => {
-      //Deletes first element from array (username)
       msgArray.shift();
-      //Returnes rest of array joined by ':' cause of it was splited firstly to get username
       return msgArray.join(':');
     };
-    //Input message with nickname before
-    messageCol[0].innerHTML += `<div class="message ${classReturn(valueArrayGeted[0])}"><span>${checkUser(valueArrayGeted[0])} ${messageJoin(valueArrayGeted)}</span></div>`;
-    //Auto scroll
-    messageCol[1].scrollTop = messageCol[1].scrollHeight;
-  });
+    //Handling ------------------------
 
+    allMessages.forEach(element => {
+      let message = element[1].split(':');
+
+      console.log(message);
+      messageCol[0].innerHTML += `<div class="message ${classReturn(message[0])}"><span>${checkUser(message[0])} ${messageJoin(message)}</span></div>`;
+      messageCol[1].scrollTop = messageCol[1].scrollHeight;
+    });
+
+    database.on('child_added', value => {
+      let valueArrayGeted = value.val().split(':');
+
+      if (!document.hasFocus()) {
+        document.title = 'New Message!!';
+      }
+
+      //Input message with nickname before
+      messageCol[0].innerHTML += `<div class="message ${classReturn(valueArrayGeted[0])}"><span>${checkUser(valueArrayGeted[0])} ${messageJoin(valueArrayGeted)}</span></div>`;
+      //Auto scroll
+      messageCol[1].scrollTop = messageCol[1].scrollHeight;
+    });
+  });
   /*
     --------------------TEXTAREA ENTER---------------------------
   */
