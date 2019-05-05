@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /*
     ---------------------DATABASE ONCE CHILDREN---------------------------
   */
-  database.once('value', async value => {
+  database.once('value', value => {
     //Variables ---------------------------------
     let allMessages = value.val();
     allMessages = Object.entries(allMessages);
@@ -85,15 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     //Handling ------------------------
 
-    allMessages.forEach(element => {
-      let message = element[1].split(':');
+    allMessages.forEach((element, index) => {
+      if(index !== allMessages.length - 1) {
+        let message = element[1].split(':');
 
-      messageCol[0].innerHTML += `<div class="message ${classReturn(message[0])}"><span>${checkUser(message[0])} ${messageJoin(message)}</span></div>`;
-      messageCol[1].scrollTop = messageCol[1].scrollHeight;
+        messageCol[0].innerHTML += `<div class="message ${classReturn(message[0])}"><span>${checkUser(message[0])} ${messageJoin(message)}</span></div>`;
+        messageCol[1].scrollTop = messageCol[1].scrollHeight;
+      }
     });
 
-    database.on('child_added', value => {
+    database.limitToLast(1).on('child_added', value => {
       let valueArrayGeted = value.val().split(':');
+      let lastMessage = document.querySelectorAll('.message');
+      lastMessage = lastMessage[lastMessage.length - 1].childNodes[0].innerHTML;
 
       if (!document.hasFocus()) {
         document.title = 'New Message!!';
