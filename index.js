@@ -98,7 +98,11 @@ document.addEventListener('DOMContentLoaded', () => {
       let valueArrayGeted = value.val().split(':');
 
       if (!document.hasFocus()) {
+        const notifyAudio = document.querySelector('audio');
         document.title = 'New Message!!';
+
+        notifyAudio.currentTime = 0;
+        notifyAudio.play();
       }
 
       //Input message with nickname before
