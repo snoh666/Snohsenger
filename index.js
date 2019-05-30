@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let usernameInputed = document.getElementById('username').value.replace(/\s/g, "").replace(/(<([^>]+)>)/ig,"");
       if(usernameInputed === '' || usernameInputed === ' ') {
         alert('Username cant be empty!');
+      }else if(usernameInputed.length > 3){
+        alert('Username have to be longer than 3 letters!');
       } else {
         localStorage.setItem('name', usernameInputed);
         document.getElementsByClassName('login')[0].classList.add('move-left');
